@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { filterImageFromURL, deleteLocalFiles } from './util/util';
+import fetch from 'node-fetch';
 
 (async () => {
 
@@ -36,6 +37,19 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     if (!image_url) {
       return res.status(400)
         .send(`image_url is required`);
+    }
+
+    try {
+      new URL(image_url);
+    } catch (TypeError) {
+      return res.status(400)
+        .send(`image_url is invalid`);
+    }
+
+    const fetchImage = await fetch(image_url, { method: 'HEAD' });
+    if (!fetchImage.ok) {
+      return res.status(400)
+        .send(`image_url is invalid`);
     }
 
     const filtered_path = await filterImageFromURL(image_url);
