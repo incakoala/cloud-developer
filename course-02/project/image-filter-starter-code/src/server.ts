@@ -43,12 +43,12 @@ import fetch from 'node-fetch';
       new URL(image_url);
     } catch (TypeError) {
       return res.status(400)
-        .send(`image_url is invalid`);
+        .send(`image_url is not an URL`);
     }
 
     const fetchImage = await fetch(image_url, { method: 'HEAD' });
     if (!fetchImage.ok) {
-      return res.status(400)
+      return res.status(422)
         .send(`image_url is invalid`);
     }
 
