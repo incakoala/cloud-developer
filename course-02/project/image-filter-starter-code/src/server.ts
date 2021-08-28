@@ -31,7 +31,7 @@ import fetch from 'node-fetch';
   /**************************************************************************** */
 
   //! END @TODO1
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: express.Request, res: express.Response) => {
     let image_url = req.query.image_url as string;
 
     if (!image_url) {
@@ -60,7 +60,7 @@ import fetch from 'node-fetch';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req: express.Request, res: express.Response) => {
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
