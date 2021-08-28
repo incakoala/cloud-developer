@@ -32,7 +32,7 @@ import fetch from 'node-fetch';
 
   //! END @TODO1
   app.get("/filteredimage", async (req, res) => {
-    let { image_url } = req.query;
+    let image_url = req.query.image_url as string;
 
     if (!image_url) {
       return res.status(400)
